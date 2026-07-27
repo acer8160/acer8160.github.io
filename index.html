@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Metronome — 練習を記録する iPhone メトロノームアプリ</title>
+<meta name="description" content="Your Metronome は、拍ごとにリズムを組めて、その日の到達 BPM を自動でグラフに残せる iPhone 用の練習メトロノームです。変拍子・複合拍子・3連符・声カウントに対応。練習メモと進捗記録つき。">
+<link rel="canonical" href="https://acer8160.github.io/">
+<link rel="alternate" hreflang="ja" href="https://acer8160.github.io/">
+<link rel="alternate" hreflang="en" href="https://acer8160.github.io/en/">
+<link rel="alternate" hreflang="x-default" href="https://acer8160.github.io/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#fffaf0">
+<link rel="icon" href="./assets/icon.png">
+<link rel="apple-touch-icon" href="./assets/icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Your Metronome">
+<meta property="og:title" content="Your Metronome — 練習を記録する iPhone メトロノームアプリ">
+<meta property="og:description" content="拍ごとにリズムを組めて、その日の到達 BPM が自動でグラフに残る。練習の記録まで続くメトロノーム。">
+<meta property="og:url" content="https://acer8160.github.io/">
+<meta property="og:image" content="https://acer8160.github.io/assets/icon.png">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Your Metronome",
+  "operatingSystem": "iOS 15.1+",
+  "applicationCategory": "MusicApplication",
+  "url": "https://acer8160.github.io/",
+  "downloadUrl": "https://apps.apple.com/jp/app/id6781886049",
+  "inLanguage": ["ja", "en"],
+  "description": "拍ごとにリズムを組めて、その日の到達 BPM を自動でグラフに残せる練習用メトロノーム。変拍子・複合拍子・3連符・声カウントに対応。",
+  "offers": [
+    { "@type": "Offer", "price": "0", "priceCurrency": "JPY", "name": "無料" },
+    { "@type": "Offer", "price": "400", "priceCurrency": "JPY", "name": "Your Metronome Pro（月額）" },
+    { "@type": "Offer", "price": "3600", "priceCurrency": "JPY", "name": "Your Metronome Pro（年額・7日間無料トライアル付き）" }
+  ]
+}
+</script>
+
+<style>
+  /* 値はアプリ本体の constants/theme.ts `Colors.light`（= rewards テーマ "default" の実体）と一致させる。
+     独自の色を作らない — アプリとサイトで配色がずれる原因になる。 */
+  :root {
+    color-scheme: light;           /* クリーム一色に固定（ダーク反転させない） */
+    --bg: #fffaf0;                 /* background   / canvas */
+    --surface: #f5f0e0;            /* surface      / カード地 */
+    --surface-soft: #faf5e8;       /* surfaceSoft  */
+    --line: #e5e5e5;               /* hairline     */
+    --text: #0a0a0a;               /* text         */
+    --muted: #6a6a6a;              /* textSecondary */
+    --primary: #0a0a0a;            /* primary      */
+    --on-primary: #ffffff;         /* onPrimary    */
+    --accent: #1a3a3a;             /* brandTeal（パレットに青がないためリンクはこれ） */
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    line-height: 1.85;
+    color: var(--text);
+    background: var(--bg);
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---- language switch ---- */
+  .lang { display: flex; justify-content: flex-end; padding-top: 18px; font-size: 0.85rem; }
+  .lang a { color: var(--muted); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 4px 14px; }
+  .lang a:hover { color: var(--text); border-color: var(--text); }
+
+  /* ---- hero ---- */
+  header { text-align: center; padding: 26px 0 40px; }
+  header img.icon { width: 92px; height: 92px; border-radius: 21px; box-shadow: 0 4px 18px rgba(10,10,10,0.10); }
+  h1 { font-size: 2rem; margin: 20px 0 6px; letter-spacing: -0.01em; }
+  .tagline { font-size: 1.15rem; font-weight: 600; margin: 0 0 14px; }
+  /* 2文＝2行に収める。34em だと2文目の末尾「す。」だけが3行目に落ちる */
+  .lead { color: var(--muted); margin: 0 auto 28px; max-width: 36em; }
+  .cta {
+    display: inline-block; background: var(--primary); color: var(--on-primary);
+    text-decoration: none; font-weight: 600; font-size: 1rem;
+    padding: 13px 34px; border-radius: 999px;
+  }
+  .cta:hover { opacity: 0.85; }
+  .cta-note { display: block; color: var(--muted); font-size: 0.82rem; margin-top: 10px; }
+
+  /* ---- carousel ---- */
+  .carousel { position: relative; max-width: 900px; margin: 0 auto; padding: 0 56px; }
+  .track {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+    scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .slide {
+    flex: 0 0 100%; margin: 0; display: flex; justify-content: center;
+    scroll-snap-align: center; padding: 4px 0;
+  }
+  .slide img {
+    height: clamp(360px, 60vh, 540px);
+    width: auto; max-width: 100%;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    box-shadow: 0 6px 24px rgba(10, 10, 10, 0.07);
+    background: var(--surface-soft);
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid var(--line); background: var(--bg);
+    color: var(--text); font-size: 1.3rem; line-height: 1;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    padding: 0 0 3px;
+  }
+  .nav:hover { border-color: var(--text); }
+  .nav:disabled { opacity: 0.3; cursor: default; border-color: var(--line); }
+  .nav.prev { left: 6px; }
+  .nav.next { right: 6px; }
+  .dots { display: flex; justify-content: center; gap: 9px; margin-top: 18px; }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%; padding: 0;
+    border: 0; background: var(--line); cursor: pointer;
+  }
+  .dot[aria-current="true"] { background: var(--text); }
+  .caption { text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 10px; min-height: 1.6em; }
+  @media (max-width: 620px) {
+    .carousel { padding: 0 14px; }
+    .nav { width: 34px; height: 34px; font-size: 1.1rem; }
+    .nav.prev { left: 0; }
+    .nav.next { right: 0; }
+  }
+
+  /* ---- features ---- */
+  section { padding: 34px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 1.2rem; margin: 0 0 14px; }
+  ul { margin: 0; padding-left: 1.15em; }
+  li { margin-bottom: 7px; }
+  .sub { color: var(--muted); font-size: 0.9rem; margin-top: 12px; }
+
+  /* ---- pricing ---- */
+  .plans { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+  @media (max-width: 560px) { .plans { grid-template-columns: 1fr; } }
+  .plan { border: 1px solid var(--line); border-radius: 14px; padding: 18px; background: var(--surface); }
+  .plan h3 { margin: 0 0 4px; font-size: 1rem; }
+  .plan .price { font-size: 1.5rem; font-weight: 700; margin: 0 0 8px; }
+  .plan p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+  .terms { color: var(--muted); font-size: 0.82rem; margin-top: 18px; line-height: 1.75; }
+
+  /* ---- footer ---- */
+  footer { border-top: 1px solid var(--line); padding: 30px 0 60px; font-size: 0.88rem; }
+  footer nav a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; margin-right: 18px; display: inline-block; margin-bottom: 6px; }
+  footer nav a:hover { color: var(--text); }
+  footer .copy { color: var(--muted); margin-top: 16px; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="lang"><a href="./en/" hreflang="en">English</a></div>
+
+  <header>
+    <img class="icon" src="./assets/icon.png" width="92" height="92" alt="Your Metronome のアプリアイコン">
+    <h1>Your Metronome</h1>
+    <p class="tagline">ミスよりノリ。</p>
+    <p class="lead">
+      拍ごとにリズムを組めて、その日の到達 BPM が自動でグラフに残る。<br>
+      「鳴らすだけ」で終わらない、練習に寄り添う iPhone 用メトロノームです。
+    </p>
+    <a class="cta" href="https://apps.apple.com/jp/app/id6781886049">App Store でダウンロード</a>
+    <span class="cta-note">無料 · iPhone / iOS 15.1 以降 · アプリ内課金あり</span>
+  </header>
+</div>
+
+<div class="carousel">
+  <button class="nav prev" type="button" aria-label="前のスクリーンショット">&lsaquo;</button>
+  <div class="track" id="track" tabindex="0" aria-label="アプリのスクリーンショット">
+    <figure class="slide"><img src="./assets/ja/01-progress.png" width="600" height="1298" alt="その日の BPM が自動でグラフになる進捗画面" data-caption="毎日の上達が、見える"></figure>
+    <figure class="slide"><img src="./assets/ja/03-practice.png" width="600" height="1298" alt="4分・8分・16分を拍ごとにミックスできる練習画面" data-caption="リズムは拍ごとに、自由自在" loading="lazy"></figure>
+    <figure class="slide"><img src="./assets/ja/04-notes.png" width="600" height="1298" alt="曲ごとの練習メモを日付で整理できるメモ画面" data-caption="気づきを、書き残せる" loading="lazy"></figure>
+    <figure class="slide"><img src="./assets/ja/05-rewards.png" width="600" height="1298" alt="練習でスタンプが貯まりテーマが解放されるごほうび画面" data-caption="続けるほど、楽しくなる" loading="lazy"></figure>
+  </div>
+  <button class="nav next" type="button" aria-label="次のスクリーンショット">&rsaquo;</button>
+  <p class="caption" id="caption"></p>
+  <div class="dots" id="dots"></div>
+</div>
+
+<div class="wrap">
+
+  <section>
+    <h2>自在なリズム作り</h2>
+    <ul>
+      <li>テンポは 30〜300 BPM。スライダーで直観的に設定、±1／±10 ボタンで微調整</li>
+      <li>拍を長押しで 4分→8分→16分 と刻みを深掘り。3連符や混在は「音符」ピッカーで拍ごとに設定</li>
+      <li>各音にアクセント（強拍・弱拍・無音）を設定</li>
+      <li>4/4・3/4 の単純拍子から、6/8・12/8 の複合拍子、5/8・7/8（2+2+3）などの変拍子まで</li>
+      <li>シャッフル／スウィングのハネ具合を調整</li>
+      <li>2種類の小節を交互に鳴らす「A/B」でボサノバやクラーベにも対応</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>目と声で練習</h2>
+    <ul>
+      <li>視認モード（常に表示／交互表示／音だけ）を切り替え</li>
+      <li>声カウントで拍の頭を「1・2・3・4」と読み上げ。声に出して数える練習に</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>上達を記録する</h2>
+    <ul>
+      <li>演奏できたら「弾けた」ボタンで、その日の到達テンポを記録</li>
+      <li>日々の最高 BPM をグラフで可視化。目標 BPM も設定できます</li>
+      <li>練習中の曲にメモを紐づけて保存。曲ごとにアーカイブ</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>続けたくなる仕組み</h2>
+    <ul>
+      <li>練習でスタンプが貯まり、背景テーマを解放</li>
+      <li>練習リマインド通知でムリなく習慣化</li>
+    </ul>
+    <p class="sub">すべてのデータは端末内に保存され、アカウント登録は不要です。</p>
+  </section>
+
+  <section>
+    <h2>料金</h2>
+    <div class="plans">
+      <div class="plan">
+        <h3>無料</h3>
+        <p class="price">¥0</p>
+        <p>メトロノーム機能はすべて無料。日々の BPM グラフ・練習メモ・プリセット3枠まで。</p>
+      </div>
+      <div class="plan">
+        <h3>Your Metronome Pro</h3>
+        <p class="price">¥400<span style="font-size:0.9rem;font-weight:400;"> / 月</span></p>
+        <p>
+          年額 ¥3,600（年額プランには7日間の無料トライアル付き）<br>
+          テンポトレーナー／連続練習（ストリーク）と目標到達予測／プリセット無制限／写真テーマの先行解放
+        </p>
+      </div>
+    </div>
+    <p class="terms">
+      Your Metronome Pro は自動更新サブスクリプションです。お支払いは購入確定時に Apple ID アカウントに請求されます。
+      期間終了の24時間前までに自動更新をオフにしない限り、自動的に更新されます。
+      更新の管理・解約は購入後に App Store のアカウント設定から行えます。
+    </p>
+  </section>
+
+  <footer>
+    <nav>
+      <a href="https://apps.apple.com/jp/app/id6781886049">App Store</a>
+      <a href="https://acer8160.github.io/legal/terms-of-use.html">利用規約</a>
+      <a href="https://acer8160.github.io/legal/privacy-policy.html">プライバシーポリシー</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOPH886VFVY8rdRcwg5Djl3YVz4LBM0P0J2GSUTerigPgBpw/viewform">お問い合わせ・不具合報告</a>
+    </nav>
+    <p class="copy">© 2026 acer8160</p>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var dots = document.getElementById('dots');
+  var caption = document.getElementById('caption');
+  var prev = document.querySelector('.nav.prev');
+  var next = document.querySelector('.nav.next');
+  var slides = Array.prototype.slice.call(track.querySelectorAll('.slide'));
+  if (!slides.length) return;
+
+  /* 現在位置は state で持つ。scrollLeft を読んで次を決めると、
+     スムーススクロール中の連打で同じ値を2回読み、送りが止まる。 */
+  var current = 0;
+
+  slides.forEach(function (_, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'dot';
+    b.setAttribute('aria-label', (i + 1) + '枚目を表示');
+    b.addEventListener('click', function () { go(i); });
+    dots.appendChild(b);
+  });
+
+  function render() {
+    Array.prototype.forEach.call(dots.children, function (d, j) {
+      d.setAttribute('aria-current', j === current ? 'true' : 'false');
+    });
+    var img = slides[current] && slides[current].querySelector('img');
+    caption.textContent = img ? (img.getAttribute('data-caption') || '') : '';
+    prev.disabled = current === 0;
+    next.disabled = current === slides.length - 1;
+  }
+  function go(i) {
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    track.scrollTo({ left: track.clientWidth * current, behavior: 'smooth' });
+    render();
+  }
+
+  /* 指でのスワイプ／トラックパッド操作から current を追従させる */
+  var t;
+  track.addEventListener('scroll', function () {
+    clearTimeout(t);
+    t = setTimeout(function () {
+      var i = Math.round(track.scrollLeft / track.clientWidth);
+      if (i !== current) { current = i; render(); }
+    }, 90);
+  });
+  window.addEventListener('resize', function () {
+    track.scrollLeft = track.clientWidth * current;
+  });
+  prev.addEventListener('click', function () { go(current - 1); });
+  next.addEventListener('click', function () { go(current + 1); });
+  track.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(current + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  });
+
+  render();
+})();
+</script>
+
+</body>
+</html>

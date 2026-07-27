@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://acer8160.github.io/sitemap.xml

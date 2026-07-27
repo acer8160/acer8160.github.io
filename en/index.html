@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Metronome — Practice Metronome for iPhone that Tracks Your Tempo</title>
+<meta name="description" content="Your Metronome is an iPhone practice metronome that lets you build rhythms beat by beat and charts the tempo you reached each day. Odd meters, compound time, triplets, voice count, practice notes and progress tracking.">
+<link rel="canonical" href="https://acer8160.github.io/en/">
+<link rel="alternate" hreflang="ja" href="https://acer8160.github.io/">
+<link rel="alternate" hreflang="en" href="https://acer8160.github.io/en/">
+<link rel="alternate" hreflang="x-default" href="https://acer8160.github.io/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#fffaf0">
+<link rel="icon" href="../assets/icon.png">
+<link rel="apple-touch-icon" href="../assets/icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Your Metronome">
+<meta property="og:title" content="Your Metronome — Practice Metronome for iPhone that Tracks Your Tempo">
+<meta property="og:description" content="Build rhythms beat by beat, and watch the tempo you reached each day chart itself. A metronome that stays with your practice.">
+<meta property="og:url" content="https://acer8160.github.io/en/">
+<meta property="og:image" content="https://acer8160.github.io/assets/icon.png">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ja_JP">
+<meta name="twitter:card" content="summary">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Your Metronome",
+  "alternateName": "Your Metronome: Rhythm Trainer",
+  "operatingSystem": "iOS 15.1+",
+  "applicationCategory": "MusicApplication",
+  "url": "https://acer8160.github.io/en/",
+  "downloadUrl": "https://apps.apple.com/us/app/id6781886049",
+  "inLanguage": ["en", "ja"],
+  "description": "A practice metronome that lets you build rhythms beat by beat and charts the tempo you reached each day. Odd meters, compound time, triplets and voice count.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "description": "Free to download. Your Metronome Pro is an auto-renewable subscription available monthly or annually, with a 7-day free trial on the annual plan."
+  }
+}
+</script>
+
+<style>
+  /* Values mirror the app's constants/theme.ts `Colors.light` (the "default" rewards theme).
+     Do not invent colors here — that is what made the site drift from the app. */
+  :root {
+    color-scheme: light;           /* cream only — never invert to dark */
+    --bg: #fffaf0;                 /* background   / canvas */
+    --surface: #f5f0e0;            /* surface      / cards */
+    --surface-soft: #faf5e8;       /* surfaceSoft  */
+    --line: #e5e5e5;               /* hairline     */
+    --text: #0a0a0a;               /* text         */
+    --muted: #6a6a6a;              /* textSecondary */
+    --primary: #0a0a0a;            /* primary      */
+    --on-primary: #ffffff;         /* onPrimary    */
+    --accent: #1a3a3a;             /* brandTeal (no blue exists in the palette) */
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+    line-height: 1.75;
+    color: var(--text);
+    background: var(--bg);
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+  .lang { display: flex; justify-content: flex-end; padding-top: 18px; font-size: 0.85rem; }
+  .lang a { color: var(--muted); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 4px 14px; }
+  .lang a:hover { color: var(--text); border-color: var(--text); }
+
+  header { text-align: center; padding: 26px 0 40px; }
+  header img.icon { width: 92px; height: 92px; border-radius: 21px; box-shadow: 0 4px 18px rgba(10,10,10,0.10); }
+  h1 { font-size: 2rem; margin: 20px 0 6px; letter-spacing: -0.01em; }
+  .tagline { font-size: 1.15rem; font-weight: 600; margin: 0 0 14px; }
+  /* 2文＝2行に収める。36em だと1文目の末尾 "itself." だけが2行目に落ちる */
+  .lead { color: var(--muted); margin: 0 auto 28px; max-width: 40em; }
+  .cta {
+    display: inline-block; background: var(--primary); color: var(--on-primary);
+    text-decoration: none; font-weight: 600; font-size: 1rem;
+    padding: 13px 34px; border-radius: 999px;
+  }
+  .cta:hover { opacity: 0.85; }
+  .cta-note { display: block; color: var(--muted); font-size: 0.82rem; margin-top: 10px; }
+
+  /* ---- carousel ---- */
+  .carousel { position: relative; max-width: 900px; margin: 0 auto; padding: 0 56px; }
+  .track {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+    scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch;
+  }
+  .track::-webkit-scrollbar { display: none; }
+  .slide {
+    flex: 0 0 100%; margin: 0; display: flex; justify-content: center;
+    scroll-snap-align: center; padding: 4px 0;
+  }
+  .slide img {
+    height: clamp(360px, 60vh, 540px);
+    width: auto; max-width: 100%;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    box-shadow: 0 6px 24px rgba(10, 10, 10, 0.07);
+    background: var(--surface-soft);
+  }
+  .nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid var(--line); background: var(--bg);
+    color: var(--text); font-size: 1.3rem; line-height: 1;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    padding: 0 0 3px;
+  }
+  .nav:hover { border-color: var(--text); }
+  .nav:disabled { opacity: 0.3; cursor: default; border-color: var(--line); }
+  .nav.prev { left: 6px; }
+  .nav.next { right: 6px; }
+  .dots { display: flex; justify-content: center; gap: 9px; margin-top: 18px; }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%; padding: 0;
+    border: 0; background: var(--line); cursor: pointer;
+  }
+  .dot[aria-current="true"] { background: var(--text); }
+  .caption { text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 10px; min-height: 1.6em; }
+  @media (max-width: 620px) {
+    .carousel { padding: 0 14px; }
+    .nav { width: 34px; height: 34px; font-size: 1.1rem; }
+    .nav.prev { left: 0; }
+    .nav.next { right: 0; }
+  }
+
+  section { padding: 34px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 1.2rem; margin: 0 0 14px; }
+  ul { margin: 0; padding-left: 1.15em; }
+  li { margin-bottom: 7px; }
+  .sub { color: var(--muted); font-size: 0.9rem; margin-top: 12px; }
+
+  .plans { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+  @media (max-width: 560px) { .plans { grid-template-columns: 1fr; } }
+  .plan { border: 1px solid var(--line); border-radius: 14px; padding: 18px; background: var(--surface); }
+  .plan h3 { margin: 0 0 4px; font-size: 1rem; }
+  .plan .price { font-size: 1.5rem; font-weight: 700; margin: 0 0 8px; }
+  .plan p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.65; }
+  .terms { color: var(--muted); font-size: 0.82rem; margin-top: 18px; line-height: 1.7; }
+
+  footer { border-top: 1px solid var(--line); padding: 30px 0 60px; font-size: 0.88rem; }
+  footer nav a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; margin-right: 18px; display: inline-block; margin-bottom: 6px; }
+  footer nav a:hover { color: var(--text); }
+  footer .copy { color: var(--muted); margin-top: 16px; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="lang"><a href="../" hreflang="ja">日本語</a></div>
+
+  <header>
+    <img class="icon" src="../assets/icon.png" width="92" height="92" alt="Your Metronome app icon">
+    <h1>Your Metronome</h1>
+    <p class="tagline">Groove over mistakes.</p>
+    <p class="lead">
+      Build rhythms beat by beat, and watch the tempo you reached each day chart itself.<br>
+      A practice metronome for iPhone that does more than keep time.
+    </p>
+    <a class="cta" href="https://apps.apple.com/us/app/id6781886049">Download on the App Store</a>
+    <span class="cta-note">Free · iPhone / iOS 15.1 or later · In-app purchases</span>
+  </header>
+</div>
+
+<div class="carousel">
+  <button class="nav prev" type="button" aria-label="Previous screenshot">&lsaquo;</button>
+  <div class="track" id="track" tabindex="0" aria-label="App screenshots">
+    <figure class="slide"><img src="../assets/en/01-progress.png" width="600" height="1298" alt="Progress screen charting your daily top BPM automatically" data-caption="Watch yourself improve"></figure>
+    <figure class="slide"><img src="../assets/en/03-practice.png" width="600" height="1298" alt="Practice screen mixing quarter, 8th and 16th notes beat by beat" data-caption="Any rhythm, beat by beat" loading="lazy"></figure>
+    <figure class="slide"><img src="../assets/en/04-notes.png" width="600" height="1298" alt="Notes screen organizing practice notes by day" data-caption="Capture every insight" loading="lazy"></figure>
+    <figure class="slide"><img src="../assets/en/05-rewards.png" width="600" height="1298" alt="Rewards screen where practice earns stamps and unlocks themes" data-caption="Practice earns rewards" loading="lazy"></figure>
+  </div>
+  <button class="nav next" type="button" aria-label="Next screenshot">&rsaquo;</button>
+  <p class="caption" id="caption"></p>
+  <div class="dots" id="dots"></div>
+</div>
+
+<div class="wrap">
+
+  <section>
+    <h2>Build any rhythm</h2>
+    <ul>
+      <li>Tempo from 30 to 300 BPM — set it intuitively with the slider, fine-tune with ±1 / ±10</li>
+      <li>Long-press a beat to deepen the split: quarter → 8th → 16th; pick triplets or mixed values per beat</li>
+      <li>Put an accent on every note (strong, weak, or silent)</li>
+      <li>From simple 4/4 and 3/4 to compound 6/8 and 12/8, and odd meters like 5/8 and 7/8 (2+2+3)</li>
+      <li>Adjustable shuffle / swing feel</li>
+      <li>Alternate two different bars with A/B — great for bossa nova and clave</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Practice by eye and voice</h2>
+    <ul>
+      <li>Switch visual modes: always on / alternating / sound only</li>
+      <li>Voice count reads the downbeats aloud ("1, 2, 3, 4") for counting practice</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Track your progress</h2>
+    <ul>
+      <li>Tap "Cleared" to log the tempo you reached today</li>
+      <li>See your daily top BPM on a graph and set a target BPM</li>
+      <li>Attach notes to the song you're practicing, archived per song</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Keep the habit</h2>
+    <ul>
+      <li>Earn stamps as you practice and unlock background themes</li>
+      <li>Gentle practice reminders help you stay consistent</li>
+    </ul>
+    <p class="sub">All data is stored on your device. No account required.</p>
+  </section>
+
+  <section>
+    <h2>Pricing</h2>
+    <div class="plans">
+      <div class="plan">
+        <h3>Free</h3>
+        <p class="price">Free</p>
+        <p>Every metronome feature is free, plus the daily BPM graph, practice notes, and up to 3 presets.</p>
+      </div>
+      <div class="plan">
+        <h3>Your Metronome Pro</h3>
+        <p class="price">Monthly<span style="font-size:0.9rem;font-weight:400;"> or annual</span></p>
+        <p>
+          A 7-day free trial comes with the annual plan. Prices are shown in your local currency on the App Store.<br>
+          Tempo Trainer / practice streak and goal-ETA forecast / unlimited presets / early access to the photo theme
+        </p>
+      </div>
+    </div>
+    <p class="terms">
+      Your Metronome Pro is an auto-renewable subscription. Payment is charged to your Apple ID at confirmation of purchase.
+      It renews automatically unless auto-renew is turned off at least 24 hours before the end of the period.
+      You can manage or cancel in your App Store account settings after purchase.
+    </p>
+  </section>
+
+  <footer>
+    <nav>
+      <a href="https://apps.apple.com/us/app/id6781886049">App Store</a>
+      <a href="https://acer8160.github.io/legal/terms-of-use.en.html">Terms of Use</a>
+      <a href="https://acer8160.github.io/legal/privacy-policy.en.html">Privacy Policy</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfE4pPD4Pfz_sC1BBwSqIqS9PSS9te_fK1rsqXHe1-S-N1hjA/viewform">Contact &amp; bug report</a>
+    </nav>
+    <p class="copy">© 2026 acer8160</p>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var track = document.getElementById('track');
+  var dots = document.getElementById('dots');
+  var caption = document.getElementById('caption');
+  var prev = document.querySelector('.nav.prev');
+  var next = document.querySelector('.nav.next');
+  var slides = Array.prototype.slice.call(track.querySelectorAll('.slide'));
+  if (!slides.length) return;
+
+  /* Keep the position in state. Reading scrollLeft at click time makes rapid
+     clicks read the same value twice mid-smooth-scroll, so the carousel stalls. */
+  var current = 0;
+
+  slides.forEach(function (_, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'dot';
+    b.setAttribute('aria-label', 'Show screenshot ' + (i + 1));
+    b.addEventListener('click', function () { go(i); });
+    dots.appendChild(b);
+  });
+
+  function render() {
+    Array.prototype.forEach.call(dots.children, function (d, j) {
+      d.setAttribute('aria-current', j === current ? 'true' : 'false');
+    });
+    var img = slides[current] && slides[current].querySelector('img');
+    caption.textContent = img ? (img.getAttribute('data-caption') || '') : '';
+    prev.disabled = current === 0;
+    next.disabled = current === slides.length - 1;
+  }
+  function go(i) {
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    track.scrollTo({ left: track.clientWidth * current, behavior: 'smooth' });
+    render();
+  }
+
+  /* Follow manual swipes / trackpad scrolling */
+  var t;
+  track.addEventListener('scroll', function () {
+    clearTimeout(t);
+    t = setTimeout(function () {
+      var i = Math.round(track.scrollLeft / track.clientWidth);
+      if (i !== current) { current = i; render(); }
+    }, 90);
+  });
+  window.addEventListener('resize', function () {
+    track.scrollLeft = track.clientWidth * current;
+  });
+  prev.addEventListener('click', function () { go(current - 1); });
+  next.addEventListener('click', function () { go(current + 1); });
+  track.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(current + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  });
+
+  render();
+})();
+</script>
+
+</body>
+</html>
