@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Your Metronome — 練習を記録する iPhone メトロノームアプリ</title>
-<meta name="description" content="Your Metronome は、拍ごとにリズムを組めて、その日の到達 BPM を自動でグラフに残せる iPhone 用の練習メトロノームです。変拍子・複合拍子・3連符・声カウントに対応。練習メモと進捗記録つき。">
+<meta name="description" content="Your Metronome は、拍ごとにリズムを組めて、その日の到達 BPM をグラフに残せる iPhone 用の練習メトロノームです。変拍子・複合拍子・3連符・声カウントに対応。練習メモと進捗記録つき。">
 <link rel="canonical" href="https://acer8160.github.io/">
 <link rel="alternate" hreflang="ja" href="https://acer8160.github.io/">
 <link rel="alternate" hreflang="en" href="https://acer8160.github.io/en/">
@@ -17,7 +17,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Your Metronome">
 <meta property="og:title" content="Your Metronome — 練習を記録する iPhone メトロノームアプリ">
-<meta property="og:description" content="拍ごとにリズムを組めて、その日の到達 BPM が自動でグラフに残る。練習の記録まで続くメトロノーム。">
+<meta property="og:description" content="拍ごとにリズムを組めて、その日の到達 BPM がグラフに残る。練習の記録まで続くメトロノーム。">
 <meta property="og:url" content="https://acer8160.github.io/">
 <meta property="og:image" content="https://acer8160.github.io/assets/icon.png">
 <meta property="og:locale" content="ja_JP">
@@ -29,16 +29,77 @@
   "@context": "https://schema.org",
   "@type": "MobileApplication",
   "name": "Your Metronome",
+  "alternateName": "Your Metronome: Rhythm Trainer",
   "operatingSystem": "iOS 15.1+",
   "applicationCategory": "MusicApplication",
   "url": "https://acer8160.github.io/",
   "downloadUrl": "https://apps.apple.com/jp/app/id6781886049",
+  "sameAs": [
+    "https://apps.apple.com/jp/app/id6781886049",
+    "https://apps.apple.com/us/app/id6781886049"
+  ],
+  "author": { "@type": "Organization", "name": "acer8160", "url": "https://acer8160.github.io/" },
+  "publisher": { "@type": "Organization", "name": "acer8160", "url": "https://acer8160.github.io/" },
+  "datePublished": "2026-07-15",
+  "softwareVersion": "1.0",
+  "screenshot": [
+    "https://acer8160.github.io/assets/ja/01-progress.png",
+    "https://acer8160.github.io/assets/ja/03-practice.png",
+    "https://acer8160.github.io/assets/ja/04-notes.png",
+    "https://acer8160.github.io/assets/ja/05-rewards.png"
+  ],
   "inLanguage": ["ja", "en"],
-  "description": "拍ごとにリズムを組めて、その日の到達 BPM を自動でグラフに残せる練習用メトロノーム。変拍子・複合拍子・3連符・声カウントに対応。",
+  "description": "拍ごとにリズムを組めて、その日の到達 BPM をグラフに残せる練習用メトロノーム。変拍子・複合拍子・3連符・声カウントに対応。",
   "offers": [
     { "@type": "Offer", "price": "0", "priceCurrency": "JPY", "name": "無料" },
     { "@type": "Offer", "price": "400", "priceCurrency": "JPY", "name": "Your Metronome Pro（月額）" },
     { "@type": "Offer", "price": "3600", "priceCurrency": "JPY", "name": "Your Metronome Pro（年額・7日間無料トライアル付き）" }
+  ]
+}
+</script>
+
+<!-- 本文の「よくある質問」セクションと一字一句同じに保つこと -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "ja",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Your Metronome はどんなアプリですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "Your Metronome は、acer8160 が開発した iPhone 用の練習メトロノームアプリです。メトロノーム機能は無料で、「✓弾けた」を押すとその日の到達テンポが記録され、日々の最高 BPM がグラフに残ります。" }
+    },
+    {
+      "@type": "Question",
+      "name": "無料でどこまで使えますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "30〜300 BPM のメトロノーム、拍ごとの音符設定、変拍子、声カウント、日々の BPM グラフ、練習メモ、プリセット3枠までが無料です。テンポトレーナー、連続練習（ストリーク）と目標到達予測、プリセット無制限は月額 ¥400 / 年額 ¥3,600 の Your Metronome Pro に含まれます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "変拍子や複合拍子に対応していますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "対応しています。4/4・3/4 の単純拍子に加え、6/8・12/8 の複合拍子、5/8・7/8（2+2+3）などの変拍子を設定できます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "音符の刻み（サブディビジョン）は拍ごとに変えられますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "できます。拍を長押しすると 4分 → 8分 → 16分 と深掘りでき、3連符や混在も「音符」ピッカーで拍ごとに設定できます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "練習した記録は残りますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "「弾けた」ボタンでその日の到達テンポを記録すると、日々の最高 BPM がグラフになります。曲ごとの練習メモも保存できます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "アカウント登録やインターネット接続は必要ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "どちらも不要です。すべてのデータは端末内に保存されます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "Android 版はありますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "現在は iPhone（iOS 15.1 以降）のみの提供です。" }
+    }
   ]
 }
 </script>
@@ -91,7 +152,8 @@
   .cta-note { display: block; color: var(--muted); font-size: 0.82rem; margin-top: 10px; }
 
   /* ---- carousel ---- */
-  .carousel { position: relative; max-width: 900px; margin: 0 auto; padding: 0 56px; }
+  /* 下マージンは、ドットが直下 section の border-top に接触するのを防ぐため */
+  .carousel { position: relative; max-width: 900px; margin: 0 auto 30px; padding: 0 56px; }
   .track {
     display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
     scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch;
@@ -151,6 +213,11 @@
   .plan p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
   .terms { color: var(--muted); font-size: 0.82rem; margin-top: 18px; line-height: 1.75; }
 
+  /* FAQ — 既存変数のみ使う。新しい色・フォントは足さない */
+  .faq h3 { font-size: 1rem; margin: 20px 0 6px; }
+  .faq h3:first-of-type { margin-top: 0; }
+  .faq p { margin: 0; color: var(--muted); font-size: 0.92rem; line-height: 1.8; }
+
   /* ---- footer ---- */
   footer { border-top: 1px solid var(--line); padding: 30px 0 60px; font-size: 0.88rem; }
   footer nav a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; margin-right: 18px; display: inline-block; margin-bottom: 6px; }
@@ -168,7 +235,7 @@
     <h1>Your Metronome</h1>
     <p class="tagline">ミスよりノリ。</p>
     <p class="lead">
-      拍ごとにリズムを組めて、その日の到達 BPM が自動でグラフに残る。<br>
+      拍ごとにリズムを組めて、その日の到達 BPM がグラフに残る。<br>
       「鳴らすだけ」で終わらない、練習に寄り添う iPhone 用メトロノームです。
     </p>
     <a class="cta" href="https://apps.apple.com/jp/app/id6781886049">App Store でダウンロード</a>
@@ -179,7 +246,7 @@
 <div class="carousel">
   <button class="nav prev" type="button" aria-label="前のスクリーンショット">&lsaquo;</button>
   <div class="track" id="track" tabindex="0" aria-label="アプリのスクリーンショット">
-    <figure class="slide"><img src="./assets/ja/01-progress.png" width="600" height="1298" alt="その日の BPM が自動でグラフになる進捗画面" data-caption="毎日の上達が、見える"></figure>
+    <figure class="slide"><img src="./assets/ja/01-progress.png" width="600" height="1298" alt="その日の到達 BPM がグラフになる進捗画面" data-caption="毎日の上達が、見える"></figure>
     <figure class="slide"><img src="./assets/ja/03-practice.png" width="600" height="1298" alt="4分・8分・16分を拍ごとにミックスできる練習画面" data-caption="リズムは拍ごとに、自由自在" loading="lazy"></figure>
     <figure class="slide"><img src="./assets/ja/04-notes.png" width="600" height="1298" alt="曲ごとの練習メモを日付で整理できるメモ画面" data-caption="気づきを、書き残せる" loading="lazy"></figure>
     <figure class="slide"><img src="./assets/ja/05-rewards.png" width="600" height="1298" alt="練習でスタンプが貯まりテーマが解放されるごほうび画面" data-caption="続けるほど、楽しくなる" loading="lazy"></figure>
@@ -251,6 +318,33 @@
       期間終了の24時間前までに自動更新をオフにしない限り、自動的に更新されます。
       更新の管理・解約は購入後に App Store のアカウント設定から行えます。
     </p>
+  </section>
+
+  <!-- FAQ の文言は下部の FAQPage JSON-LD と一字一句同じに保つ。
+       LLM は JSON-LD を HTML 全体のトークン列として読むため、食い違うと逆効果になる。 -->
+  <section class="faq">
+    <h2>よくある質問</h2>
+
+    <h3>Your Metronome はどんなアプリですか？</h3>
+    <p>Your Metronome は、acer8160 が開発した iPhone 用の練習メトロノームアプリです。メトロノーム機能は無料で、「✓弾けた」を押すとその日の到達テンポが記録され、日々の最高 BPM がグラフに残ります。</p>
+
+    <h3>無料でどこまで使えますか？</h3>
+    <p>30〜300 BPM のメトロノーム、拍ごとの音符設定、変拍子、声カウント、日々の BPM グラフ、練習メモ、プリセット3枠までが無料です。テンポトレーナー、連続練習（ストリーク）と目標到達予測、プリセット無制限は月額 ¥400 / 年額 ¥3,600 の Your Metronome Pro に含まれます。</p>
+
+    <h3>変拍子や複合拍子に対応していますか？</h3>
+    <p>対応しています。4/4・3/4 の単純拍子に加え、6/8・12/8 の複合拍子、5/8・7/8（2+2+3）などの変拍子を設定できます。</p>
+
+    <h3>音符の刻み（サブディビジョン）は拍ごとに変えられますか？</h3>
+    <p>できます。拍を長押しすると 4分 → 8分 → 16分 と深掘りでき、3連符や混在も「音符」ピッカーで拍ごとに設定できます。</p>
+
+    <h3>練習した記録は残りますか？</h3>
+    <p>「弾けた」ボタンでその日の到達テンポを記録すると、日々の最高 BPM がグラフになります。曲ごとの練習メモも保存できます。</p>
+
+    <h3>アカウント登録やインターネット接続は必要ですか？</h3>
+    <p>どちらも不要です。すべてのデータは端末内に保存されます。</p>
+
+    <h3>Android 版はありますか？</h3>
+    <p>現在は iPhone（iOS 15.1 以降）のみの提供です。</p>
   </section>
 
   <footer>

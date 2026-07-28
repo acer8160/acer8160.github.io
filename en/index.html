@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Your Metronome — Practice Metronome for iPhone that Tracks Your Tempo</title>
-<meta name="description" content="Your Metronome is an iPhone practice metronome that lets you build rhythms beat by beat and charts the tempo you reached each day. Odd meters, compound time, triplets, voice count, practice notes and progress tracking.">
+<meta name="description" content="Your Metronome is an iPhone practice metronome that lets you build rhythms beat by beat and log the tempo you reached each day on a graph. Odd meters, compound time, triplets, voice count, practice notes and progress tracking.">
 <link rel="canonical" href="https://acer8160.github.io/en/">
 <link rel="alternate" hreflang="ja" href="https://acer8160.github.io/">
 <link rel="alternate" hreflang="en" href="https://acer8160.github.io/en/">
@@ -17,7 +17,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Your Metronome">
 <meta property="og:title" content="Your Metronome — Practice Metronome for iPhone that Tracks Your Tempo">
-<meta property="og:description" content="Build rhythms beat by beat, and watch the tempo you reached each day chart itself. A metronome that stays with your practice.">
+<meta property="og:description" content="Build rhythms beat by beat, and log the tempo you reached each day on a graph. A metronome that stays with your practice.">
 <meta property="og:url" content="https://acer8160.github.io/en/">
 <meta property="og:image" content="https://acer8160.github.io/assets/icon.png">
 <meta property="og:locale" content="en_US">
@@ -28,20 +28,80 @@
 {
   "@context": "https://schema.org",
   "@type": "MobileApplication",
-  "name": "Your Metronome",
-  "alternateName": "Your Metronome: Rhythm Trainer",
+  "name": "Your Metronome: Rhythm Trainer",
+  "alternateName": "Your Metronome",
   "operatingSystem": "iOS 15.1+",
   "applicationCategory": "MusicApplication",
   "url": "https://acer8160.github.io/en/",
   "downloadUrl": "https://apps.apple.com/us/app/id6781886049",
+  "sameAs": [
+    "https://apps.apple.com/us/app/id6781886049",
+    "https://apps.apple.com/jp/app/id6781886049"
+  ],
+  "author": { "@type": "Organization", "name": "acer8160", "url": "https://acer8160.github.io/" },
+  "publisher": { "@type": "Organization", "name": "acer8160", "url": "https://acer8160.github.io/" },
+  "datePublished": "2026-07-15",
+  "softwareVersion": "1.0",
+  "screenshot": [
+    "https://acer8160.github.io/assets/en/01-progress.png",
+    "https://acer8160.github.io/assets/en/03-practice.png",
+    "https://acer8160.github.io/assets/en/04-notes.png",
+    "https://acer8160.github.io/assets/en/05-rewards.png"
+  ],
   "inLanguage": ["en", "ja"],
-  "description": "A practice metronome that lets you build rhythms beat by beat and charts the tempo you reached each day. Odd meters, compound time, triplets and voice count.",
+  "description": "A practice metronome that lets you build rhythms beat by beat and log the tempo you reached each day on a graph. Odd meters, compound time, triplets and voice count.",
   "offers": {
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "USD",
     "description": "Free to download. Your Metronome Pro is an auto-renewable subscription available monthly or annually, with a 7-day free trial on the annual plan."
   }
+}
+</script>
+
+<!-- Keep identical to the "Frequently asked questions" section in the body -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "en",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Your Metronome?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Your Metronome (listed on the App Store as Your Metronome: Rhythm Trainer) is a practice metronome app for iPhone, made by acer8160. The metronome itself is free, and tapping “Cleared” logs the tempo you reached that day, so your daily bests build up on a graph." }
+    },
+    {
+      "@type": "Question",
+      "name": "What do I get for free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The 30–300 BPM metronome, per-beat note values, odd and compound meters, voice count, the daily BPM graph, practice notes, and up to 3 presets are all free. Tempo Trainer, practice streaks with goal-ETA forecasting, and unlimited presets are part of Your Metronome Pro, available monthly or annually." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it support odd and compound time signatures?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Alongside simple meters such as 4/4 and 3/4, you can set compound meters like 6/8 and 12/8, and odd meters like 5/8 and 7/8 (2+2+3)." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I change the subdivision for each beat?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Press and hold a beat to go from quarter to eighth to sixteenth notes, and use the note picker to set triplets or mixed values on a per-beat basis." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it keep a record of my practice?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Tap the “Cleared” button to log the tempo you reached that day, and your daily best BPM builds up on a graph. You can also save practice notes for each song." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need an account or an internet connection?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Neither. All data is stored on your device." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there an Android version?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not at the moment — Your Metronome is available for iPhone only, on iOS 15.1 or later." }
+    }
+  ]
 }
 </script>
 
@@ -91,7 +151,8 @@
   .cta-note { display: block; color: var(--muted); font-size: 0.82rem; margin-top: 10px; }
 
   /* ---- carousel ---- */
-  .carousel { position: relative; max-width: 900px; margin: 0 auto; padding: 0 56px; }
+  /* Bottom margin keeps the dots off the border-top of the section below */
+  .carousel { position: relative; max-width: 900px; margin: 0 auto 30px; padding: 0 56px; }
   .track {
     display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
     scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch;
@@ -149,6 +210,11 @@
   .plan p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.65; }
   .terms { color: var(--muted); font-size: 0.82rem; margin-top: 18px; line-height: 1.7; }
 
+  /* FAQ — reuse existing variables only; no new colours or fonts */
+  .faq h3 { font-size: 1rem; margin: 20px 0 6px; }
+  .faq h3:first-of-type { margin-top: 0; }
+  .faq p { margin: 0; color: var(--muted); font-size: 0.92rem; line-height: 1.8; }
+
   footer { border-top: 1px solid var(--line); padding: 30px 0 60px; font-size: 0.88rem; }
   footer nav a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; margin-right: 18px; display: inline-block; margin-bottom: 6px; }
   footer nav a:hover { color: var(--text); }
@@ -165,7 +231,7 @@
     <h1>Your Metronome</h1>
     <p class="tagline">Groove over mistakes.</p>
     <p class="lead">
-      Build rhythms beat by beat, and watch the tempo you reached each day chart itself.<br>
+      Build rhythms beat by beat, and log the tempo you reached each day on a graph.<br>
       A practice metronome for iPhone that does more than keep time.
     </p>
     <a class="cta" href="https://apps.apple.com/us/app/id6781886049">Download on the App Store</a>
@@ -176,7 +242,7 @@
 <div class="carousel">
   <button class="nav prev" type="button" aria-label="Previous screenshot">&lsaquo;</button>
   <div class="track" id="track" tabindex="0" aria-label="App screenshots">
-    <figure class="slide"><img src="../assets/en/01-progress.png" width="600" height="1298" alt="Progress screen charting your daily top BPM automatically" data-caption="Watch yourself improve"></figure>
+    <figure class="slide"><img src="../assets/en/01-progress.png" width="600" height="1298" alt="Progress screen showing your daily top BPM on a graph" data-caption="Watch yourself improve"></figure>
     <figure class="slide"><img src="../assets/en/03-practice.png" width="600" height="1298" alt="Practice screen mixing quarter, 8th and 16th notes beat by beat" data-caption="Any rhythm, beat by beat" loading="lazy"></figure>
     <figure class="slide"><img src="../assets/en/04-notes.png" width="600" height="1298" alt="Notes screen organizing practice notes by day" data-caption="Capture every insight" loading="lazy"></figure>
     <figure class="slide"><img src="../assets/en/05-rewards.png" width="600" height="1298" alt="Rewards screen where practice earns stamps and unlocks themes" data-caption="Practice earns rewards" loading="lazy"></figure>
@@ -248,6 +314,33 @@
       It renews automatically unless auto-renew is turned off at least 24 hours before the end of the period.
       You can manage or cancel in your App Store account settings after purchase.
     </p>
+  </section>
+
+  <!-- Keep this copy character-for-character identical to the FAQPage JSON-LD in <head>.
+       LLMs tokenise the whole HTML, so a mismatch between the two hurts rather than helps. -->
+  <section class="faq">
+    <h2>Frequently asked questions</h2>
+
+    <h3>What is Your Metronome?</h3>
+    <p>Your Metronome (listed on the App Store as Your Metronome: Rhythm Trainer) is a practice metronome app for iPhone, made by acer8160. The metronome itself is free, and tapping “Cleared” logs the tempo you reached that day, so your daily bests build up on a graph.</p>
+
+    <h3>What do I get for free?</h3>
+    <p>The 30–300 BPM metronome, per-beat note values, odd and compound meters, voice count, the daily BPM graph, practice notes, and up to 3 presets are all free. Tempo Trainer, practice streaks with goal-ETA forecasting, and unlimited presets are part of Your Metronome Pro, available monthly or annually.</p>
+
+    <h3>Does it support odd and compound time signatures?</h3>
+    <p>Yes. Alongside simple meters such as 4/4 and 3/4, you can set compound meters like 6/8 and 12/8, and odd meters like 5/8 and 7/8 (2+2+3).</p>
+
+    <h3>Can I change the subdivision for each beat?</h3>
+    <p>Yes. Press and hold a beat to go from quarter to eighth to sixteenth notes, and use the note picker to set triplets or mixed values on a per-beat basis.</p>
+
+    <h3>Does it keep a record of my practice?</h3>
+    <p>Tap the “Cleared” button to log the tempo you reached that day, and your daily best BPM builds up on a graph. You can also save practice notes for each song.</p>
+
+    <h3>Do I need an account or an internet connection?</h3>
+    <p>Neither. All data is stored on your device.</p>
+
+    <h3>Is there an Android version?</h3>
+    <p>Not at the moment — Your Metronome is available for iPhone only, on iOS 15.1 or later.</p>
   </section>
 
   <footer>
