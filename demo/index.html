@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Metronome — Practice video demo</title>
+<!-- 検索インデックス対象外。App Store の Featuring Nomination 補足資料として
+     直リンクで参照される想定のページで、LP の導線には含めない。 -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#fffaf0">
+<link rel="icon" href="../assets/icon.png">
+<link rel="apple-touch-icon" href="../assets/icon.png">
+<style>
+  /* 色はルート LP（index.html）と同じ constants/theme.ts `Colors.light` 由来。独自色は作らない。 */
+  :root {
+    color-scheme: light;
+    --bg: #fffaf0;
+    --surface: #f5f0e0;
+    --line: #e5e5e5;
+    --text: #0a0a0a;
+    --muted: #6a6a6a;
+    --accent: #1a3a3a;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Noto Sans JP", sans-serif;
+    line-height: 1.75;
+    color: var(--text);
+    background: var(--bg);
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 620px; margin: 0 auto; padding: 40px 20px 64px; }
+  header { text-align: center; margin-bottom: 28px; }
+  header img { width: 72px; height: 72px; border-radius: 16px; box-shadow: 0 4px 18px rgba(10,10,10,0.10); }
+  h1 { font-size: 1.5rem; margin: 18px 0 6px; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); margin: 0; font-size: 0.95rem; }
+
+  /* 縦動画。高さは画面内に収め、はみ出す端末では幅で律速させる。 */
+  .player { display: flex; justify-content: center; margin: 0 0 26px; }
+  .player video {
+    width: 100%; max-width: 340px; max-height: 78vh;
+    border-radius: 18px; background: #000;
+    box-shadow: 0 6px 26px rgba(10,10,10,0.14);
+  }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 14px; padding: 18px 20px; margin-bottom: 22px;
+  }
+  .card h2 { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; font-weight: 600; }
+  .card p { margin: 0 0 12px; font-size: 0.95rem; }
+  .card p:last-child { margin-bottom: 0; }
+
+  footer { text-align: center; font-size: 0.9rem; }
+  footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <img src="../assets/icon.png" alt="Your Metronome">
+    <h1>Practice video recording</h1>
+    <p class="sub">Your Metronome 1.1 &middot; unedited export from the app</p>
+  </header>
+
+  <div class="player">
+    <video src="./practice-video.mp4" controls playsinline preload="metadata"></video>
+  </div>
+
+  <div class="card">
+    <h2>What you are looking at</h2>
+    <p>A practice take recorded inside Your Metronome with the front camera. The visual beat,
+      the tempo and the click all end up inside the exported file, which is saved straight to Photos.
+      Nothing here was edited afterwards.</p>
+    <p>This is not a screen recording. The app knows every click time to the millisecond, so the
+      overlay is rebuilt as Core Animation layers and composited with AVFoundation &mdash; frame-accurate
+      in both portrait and landscape, all on device, with no upload and no account.</p>
+  </div>
+
+  <footer>
+    <a href="../">Your Metronome</a> &middot;
+    <a href="https://apps.apple.com/us/app/id6781886049">App Store</a>
+  </footer>
+
+</div>
+</body>
+</html>

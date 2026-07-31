@@ -16,8 +16,19 @@ GitHub Pages の **org サイト**として `https://acer8160.github.io/` のル
 | `en/index.html` | 英語ランディングページ |
 | `assets/{ja,en}/*.png` | App Store スクショを 600px 幅へ縮小したもの |
 | `assets/icon.png` | アプリアイコン（favicon / OGP 兼用） |
+| `demo/index.html` + `demo/practice-video.mp4` | 練習動画録画（v1.1.0）のデモ。App Store フィーチャー申請の補足資料用 |
 | `robots.txt` / `sitemap.xml` | クロール用 |
 | `.nojekyll` | Jekyll 処理を無効化 |
+
+## `demo/` の扱い
+
+App Store Connect の **Featuring Nomination（補足資料 URL）** から直リンクで参照される前提のページ。
+アプリ本体リポの [`docs/store/featuring-nomination.md`](https://github.com/KaedeYamazaki/my-metronome-app/blob/develop/docs/store/featuring-nomination.md) が正本。
+
+- **LP からは導線を張らない**（未公開機能を LP に載せない方針を崩さないため）。
+  `meta robots=noindex,nofollow` を入れ、`sitemap.xml` にも追加しない。
+- **`robots.txt` で Disallow にしない**。クロールを止めると `noindex` 自体が読まれない。
+- 動画は アプリ本体の焼き込みモジュールが書き出した原本そのまま（無編集・再エンコードなし）。
 
 ## 既存の legal サイトとの関係
 
