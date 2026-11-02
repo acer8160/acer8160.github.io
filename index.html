@@ -444,7 +444,7 @@
           $geoip_disable: true,
           page: 'ja',
           referrer_host: referrer,
-          source: /^[w.-]{1,30}$/.test(source) ? source : ''
+          source: /^[a-zA-Z0-9_.-]{1,30}$/.test(source) ? source : ''
         }
       })
     }).catch(function () {});
